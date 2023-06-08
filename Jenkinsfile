@@ -4,6 +4,9 @@ pipeline{
       jdk "jdk17"
       maven 'maven3'
     }
+    options {
+    buildDiscarder(logRotator(numToKeepStr: '1', artifactNumToKeepStr: '1'))
+    }
     stages{
         stage("CHCECK OUT"){
             steps{
@@ -13,6 +16,11 @@ pipeline{
         stage("MAVEN COMPILE"){
             steps{
                 sh 'mvn clean compile'
+            }
+        }
+        stage("MAVEN PACKAGE"){
+            steps{
+                sh 'mvn clean package'
             }
         }
     }
