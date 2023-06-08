@@ -8,17 +8,17 @@ pipeline{
     buildDiscarder(logRotator(numToKeepStr: '1', artifactNumToKeepStr: '1'))
     }
     stages{
-        stage("CHCECK OUT"){
+        stage("Check-Out"){
             steps{
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/uglk/spring-boot-devops.git'
             }
         }
-        stage("MAVEN COMPILE"){
+        stage("Maven-Compile"){
             steps{
                 sh 'mvn clean compile'
             }
         }
-        stage("MAVEN PACKAGE"){
+        stage("Maven-Build"){
             steps{
                 sh 'mvn clean package'
             }
